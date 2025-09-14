@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
       </head>
       <body>
        <h2>${process.env.BABYNAME}</h2>
-       <p class="nav"><a href="#feed">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a>
+       <!--<p class="nav"><a href="#feed">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a>-->
        ${await makeTables()}
       </body>
       </html>
@@ -53,10 +53,11 @@ app.post('/', async (req, res) => {
     const save = await saveData(data); // save customer data to db
   } catch(err){
     console.error(`WEBHOOK ${err}:`);
+    res.status(500).send({ message: 'ERROR - Try that again?' });
   }
-  res.status(200).send({ message: 'END DATA RECEIVED HOOK' });
+  console.log('END DATA RECEIVED HOOK');
+  res.status(200).send({ message: 'SUCCESS! We got you fam!' });
 });
-
 
 // --- Server Start ---
 app.listen(port, () => {

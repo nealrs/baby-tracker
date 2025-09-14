@@ -3,8 +3,6 @@
 # To stop: docker-compose down
 # To stop and remove volumes: docker-compose down -v
 
-version: '3.8'
-
 services:
   # The NodeJS Express Application service
   app:
@@ -15,7 +13,7 @@ services:
     restart: unless-stopped
     ports:
       # Exposes port 3000 on the host and maps it to port 3000 in the container
-      - "3000:3000"
+      - "9090:3000"
     volumes:
       # Mounts the current directory into the container for live code updates
       # Use :cached for better performance on macOS
