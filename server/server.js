@@ -21,8 +21,10 @@ app.get('/', async (req, res) => {
       <html lang="en">
       <head>
        <meta charset="utf-8">
-       <title>${process.env.BABYNAME}</title>
-       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="icon" href="favico.png" type="image/png">
+       <link rel="apple-touch-icon" href="favico.png">
+       <title>Baby Tracker</title>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
        <link rel="preconnect" href="https://fonts.googleapis.com">
        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Sora:wght@500&display=swap" rel="stylesheet">
@@ -30,9 +32,19 @@ app.get('/', async (req, res) => {
       </head>
       <body>
        <!--<h2>${process.env.BABYNAME}</h2>-->
-       <h3 class="sticky"><a href="#feed">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a></h3>
+       <div id="header" class="sticky">
+        <h3><a href="#feed">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a></h3>
+        
+        <div id ="formContainer">
+          <form id="form">
+            <textarea id="activity" name="activity" rows="2" cols="37" required placeholder="fed from left side, 10 minutes, was very fussy"></textarea>
+            <br><input type="submit" value="Log it" id="submitbutton"/>
+          </form>
+        </div>
+       </div>
        ${await makeTables()}
-      </body>
+       <script src="script.js" type='text/javascript'></script>
+       </body>
       </html>
     `);
   } catch (err) {

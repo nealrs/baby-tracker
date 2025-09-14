@@ -34,7 +34,7 @@ async function testDb(){
 }
 
 // Convert the Unix timestamp string to an integer.
-async function goodTime(d){
+/*async function goodTime(d){
   const date = new Date(parseInt(d, 10));
   const month = String(date.getMonth() + 1);//.padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
@@ -44,6 +44,23 @@ async function goodTime(d){
   const formattedHours = hours % 12 || 12; // Convert to 12-hour format
   const displayTime = `${month}/${day}, ${formattedHours}:${minutes} ${ampm}`;
   return displayTime;
+}*/
+
+async function goodTime(ts) {
+  // Convert the Unix timestamp string to an integer and then to a Date object.
+  const date = new Date(parseInt(ts, 10));
+
+  // Use Intl.DateTimeFormat to format the date for a specific time zone.
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true, // Use 12-hour format with AM/PM
+    timeZone: 'America/New_York', // Set the specific timezone
+  });
+  // The format() method returns the formatted string directly.
+  return formatter.format(date);
 }
 
 /**
@@ -308,7 +325,7 @@ async function feedTable() {
     </tr>`;
   }
 
-  tableHtml += '</tbody></table><p><a href="#">🔼</a></p>';
+  tableHtml += '</tbody></table>';
   return tableHtml;
 }
 
@@ -336,7 +353,7 @@ async function pumpTable() {
     </tr>`;
   }
 
-  tableHtml += '</tbody></table><p><a href="#">🔼</a></p>';
+  tableHtml += '</tbody></table>';
   return tableHtml;
 }
 
@@ -364,7 +381,7 @@ async function diaperTable() {
     </tr>`;
   }
 
-  tableHtml += '</tbody></table><p><a href="#">🔼</a></p>';
+  tableHtml += '</tbody></table>';
   return tableHtml;
 }
 

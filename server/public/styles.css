@@ -7,6 +7,18 @@ body{
   color: #1b263b;
 }
 
+textarea{
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  color: #1b263b;
+  font-size: 15px;
+}
+
+#submitbutton{
+  font-size: 14px;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: "Sora", sans-serif;
   font-optical-sizing: auto;
@@ -19,8 +31,8 @@ th{
   font-weight: 500;
 }
 
-a {color: #778da9; text-decoration: none;}
-a:active, a:hover {color: #1b263b;}
+a {color: #1b263b; text-decoration: none;}
+a:active, a:hover {color: #778da9;}
 /*a:visited {color: #85144B;}*/
 
 .sticky {
