@@ -1,0 +1,23 @@
+body{
+  width:90%;margin:auto;
+  font-family: "Geist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  color: #111111;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Sora", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+th{
+  font-weight: 500;
+}
+
+a {color: #0074D9; text-decoration: none;}
+a:active, a:hover {color: #B10DC9;}
+/*a:visited {color: #85144B;}*/

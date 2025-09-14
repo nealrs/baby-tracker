@@ -1,0 +1,57 @@
+# Defines the services, networks, and volumes for your application.
+# To run: docker-compose up --build
+# To stop: docker-compose down
+# To stop and remove volumes: docker-compose down -v
+
+version: '3.8'
+
+services:
+  # The NodeJS Express Application service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-nodeapp
+    container_name: server
+    restart: unless-stopped
+    ports:
+      # Exposes port 3000 on the host and maps it to port 3000 in the container
+      - "3000:3000"
+    volumes:
+      # Mounts the current directory into the container for live code updates
+      # Use :cached for better performance on macOS
+      - ./server:/usr/src/app
+      # Prevents the container's node_modules from being overwritten by the host's
+      - /usr/src/app/node_modules
+    env_file:
+      # Loads environment variables from the .env file
+      - ./.env
+    depends_on:
+      # Ensures the 'db' service is started before the 'app' service
+      - db
+    networks:
+      - app-network
+
+  # The PostgreSQL Database service
+  db:
+    image: postgres:15-alpine
+    container_name: db
+    restart: unless-stopped
+    env_file:
+      # Loads environment variables from the .env file
+      - ./.env
+    volumes:
+      # Persists the database data on the host machine in a named volume
+      - ./postgres:/var/lib/postgresql/data
+      # This script will run only when the postgres data directory is empty
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      # Optional: To connect from your host machine's DB client (e.g., DBeaver, TablePlus)
+      # Format: <host_port>:<container_port>
+      - "5432:5432"
+    networks:
+      - app-network
+
+# Defines the network for communication between services
+networks:
+  app-network:
+    driver: bridge

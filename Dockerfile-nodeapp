@@ -1,0 +1,25 @@
+# Use the official Node.js Long-Term Support (LTS) version on a lightweight Alpine Linux base
+FROM node:current-alpine
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to leverage Docker's layer caching
+COPY ./server/package*.json ./
+COPY .env .
+
+# Install application dependencies
+RUN npm install
+
+# For production, you might want to run a more optimized install
+# RUN npm ci --only=production
+
+# Copy the rest of your application's source code into the container
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# The command to start the application
+# Using nodemon for development to automatically restart on file changes
+CMD [ "npm", "run", "dev" ]

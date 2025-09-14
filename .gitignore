@@ -1,0 +1,17 @@
+# Dependencies and build files
+# ---------------------------
+node_modules/
+dist/
+build/
+/postgres
+
+# Environment variables
+# ---------------------
+# Ignore all .env files
+.env
+.env.*
+.DS_Store
+
+
+# But DO NOT ignore the example file
+!/.env.example
