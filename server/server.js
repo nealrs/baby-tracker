@@ -29,8 +29,8 @@ app.get('/', async (req, res) => {
        <link rel="stylesheet" href="styles.css">
       </head>
       <body>
-       <h2>${process.env.BABYNAME}</h2>
-       <!--<p class="nav"><a href="#feed">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a>-->
+       <!--<h2>${process.env.BABYNAME}</h2>-->
+       <h3 class="sticky"><a href="#feed">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a></h3>
        ${await makeTables()}
       </body>
       </html>

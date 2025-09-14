@@ -4,7 +4,7 @@ body{
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
-  color: #111111;
+  color: #1b263b;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -12,12 +12,23 @@ h1, h2, h3, h4, h5, h6 {
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+  color: #1b263b;
 }
 
 th{
   font-weight: 500;
 }
 
-a {color: #0074D9; text-decoration: none;}
-a:active, a:hover {color: #B10DC9;}
+a {color: #778da9; text-decoration: none;}
+a:active, a:hover {color: #1b263b;}
 /*a:visited {color: #85144B;}*/
+
+.sticky {
+  /* These properties make the element "sticky" */
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 100; /* Ensures the header stays on top of other content */
+  padding: 1rem 0;
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
+}

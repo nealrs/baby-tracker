@@ -308,7 +308,7 @@ async function feedTable() {
     </tr>`;
   }
 
-  tableHtml += '</tbody></table>';
+  tableHtml += '</tbody></table><p><a href="#">🔼</a></p>';
   return tableHtml;
 }
 
@@ -336,7 +336,7 @@ async function pumpTable() {
     </tr>`;
   }
 
-  tableHtml += '</tbody></table>';
+  tableHtml += '</tbody></table><p><a href="#">🔼</a></p>';
   return tableHtml;
 }
 
@@ -364,7 +364,7 @@ async function diaperTable() {
     </tr>`;
   }
 
-  tableHtml += '</tbody></table>';
+  tableHtml += '</tbody></table><p><a href="#">🔼</a></p>';
   return tableHtml;
 }
 
