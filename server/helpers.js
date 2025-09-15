@@ -293,10 +293,10 @@ function organizeRecords(allRecords) {
 async function feedTable() {
   const feeds = await getFeeds();
   if (feeds.length === 0) {
-    return '<h3 id="feed">Feedings</h3><p>No data found</p>';
+    return '<h3 id="feed">Feeding</h3><p>No data found</p>';
   }
 
-  let tableHtml = '<h3 id="feed">Feedings</h3><table>';
+  let tableHtml = '<h3 id="feed">Feeding</h3><table>';
   tableHtml += '<thead><tr><th>Time</th><th>Method</th><th>Amount</th><!--<th>Notes</th>--></tr></thead>';
   tableHtml += '<tbody>';
 
@@ -306,7 +306,7 @@ async function feedTable() {
     const sideOrContent = source === 'breast' ? feed.breast_side : feed.bottle_contents;
     const durationOrVolume = source === 'breast' ? `${feed.breast_duration ? feed.breast_duration : ""} min` : `${feed.bottle_volume ? feed.bottle_volume : ""} ${feed.bottle_volume_unit ? feed.bottle_volume_unit : ""}`;
     
-    tableHtml += `<tr>
+    tableHtml += `<tr class="stripe">
       <td>${displayTime}</td>
       <td>${source}, ${sideOrContent ? sideOrContent : '?'}</td>
       <td>${durationOrVolume}</td>
@@ -336,7 +336,7 @@ async function pumpTable() {
 
   for (const pump of pumps) {
     const displayTime = await goodTime(pump.time);
-    tableHtml += `<tr>
+    tableHtml += `<tr class="stripe">
       <td>${displayTime}</td>
       <td>${pump.breast_side ? pump.breast_side : "?"}</td>
       <td>${pump.volume ? pump.volume : ""} ${pump.volume_unit ? pump.volume_unit : "?"}</td>
@@ -366,7 +366,7 @@ async function diaperTable() {
 
   for (const diaper of diapers) {
     const displayTime = await goodTime(diaper.time);
-    tableHtml += `<tr>
+    tableHtml += `<tr class="stripe">
       <td>${displayTime}</td>
       <td>${diaper.type}</td>
       <td>${diaper.color ? diaper.color: ""}</td>
