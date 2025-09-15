@@ -33,19 +33,8 @@ async function testDb(){
   });
 }
 
-// Convert the Unix timestamp string to an integer.
-/*async function goodTime(d){
-  const date = new Date(parseInt(d, 10));
-  const month = String(date.getMonth() + 1);//.padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const hours = date.getHours();
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const formattedHours = hours % 12 || 12; // Convert to 12-hour format
-  const displayTime = `${month}/${day}, ${formattedHours}:${minutes} ${ampm}`;
-  return displayTime;
-}*/
 
+// Convert the Unix timestamp string to an integer.
 async function goodTime(ts) {
   // Convert the Unix timestamp string to an integer and then to a Date object.
   const date = new Date(parseInt(ts, 10));
@@ -307,22 +296,24 @@ async function feedTable() {
     return '<h3 id="feed">Feedings</h3><p>No data found</p>';
   }
 
-  let tableHtml = '<h3 id="feed">Feedings</h3><table style="width:100%; border-collapse: collapse;">';
-  tableHtml += '<thead style="background-color:#f2f2f2;"><tr><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Time</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Method</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Amount</th><!--<th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Notes</th>--></tr></thead>';
+  let tableHtml = '<h3 id="feed">Feedings</h3><table>';
+  tableHtml += '<thead><tr><th>Time</th><th>Method</th><th>Amount</th><!--<th>Notes</th>--></tr></thead>';
   tableHtml += '<tbody>';
 
   for (const feed of feeds) {
     const displayTime = await goodTime(feed.time);
     const source = feed.source;
     const sideOrContent = source === 'breast' ? feed.breast_side : feed.bottle_contents;
-    const durationOrVolume = source === 'breast' ? `${feed.breast_duration} min` : `${feed.bottle_volume} ${feed.bottle_volume_unit}`;
+    const durationOrVolume = source === 'breast' ? `${feed.breast_duration} min` : `${feed.bottle_volume ? feed.bottle_volume : ""} ${feed.bottle_volume_unit ? feed.bottle_volume_unit : ""}`;
     
     tableHtml += `<tr>
-      <td style="padding: 8px; border: 1px solid #ddd;">${displayTime}</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${source}, ${sideOrContent ? sideOrContent : '?'}</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${durationOrVolume}</td>
-      <!--<td style="padding: 8px; border: 1px solid #ddd;">${feed.notes ? feed.notes : ""}</td>-->
-    </tr>`;
+      <td>${displayTime}</td>
+      <td>${source}, ${sideOrContent ? sideOrContent : '?'}</td>
+      <td>${durationOrVolume}</td>
+      <!--<td>${feed.notes ? feed.notes : ""}</td>-->
+    </tr>
+    ${feed.notes ? `<tr><td colspan="3" class="notes">${feed.notes}</td></tr>` : ""}
+    `;
   }
 
   tableHtml += '</tbody></table>';
@@ -339,18 +330,20 @@ async function pumpTable() {
     return '<h3 id="pump">Pumping</h3><p>No pump data found</p>';
   }
 
-  let tableHtml = '<h3 id="pump">Pumping</h3><table style="width:100%; border-collapse: collapse;">';
-  tableHtml += '<thead style="background-color:#f2f2f2;"><tr><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Time</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Side</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Volume</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Notes</th></tr></thead>';
+  let tableHtml = '<h3 id="pump">Pumping</h3><table>';
+  tableHtml += '<thead><tr><th>Time</th><th>Side</th><th>Volume</th><!--<th>Notes</th>--></tr></thead>';
   tableHtml += '<tbody>';
 
   for (const pump of pumps) {
     const displayTime = await goodTime(pump.time);
     tableHtml += `<tr>
-      <td style="padding: 8px; border: 1px solid #ddd;">${displayTime}</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${pump.breast_side}</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${pump.volume} ${pump.volume_unit}</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${pump.notes ? pump.notes : ""}</td>
-    </tr>`;
+      <td>${displayTime}</td>
+      <td>${pump.breast_side ? pump.breast_side : "?"}</td>
+      <td>${pump.volume ? pump.volume : ""} ${pump.volume_unit ? pump.volume_unit : "?"}</td>
+      <!--<td>${pump.notes ? pump.notes : ""}</td>-->
+    </tr>
+    ${pump.notes ? `<tr><td colspan="3" class="notes">${pump.notes}</td></tr>` : ""}
+    `;
   }
 
   tableHtml += '</tbody></table>';
@@ -367,18 +360,20 @@ async function diaperTable() {
     return '<h3 id="diaper">Diapers</h3><p>No diaper data found</p>';
   }
 
-  let tableHtml = '<h3 id="diaper">Diapers</h3><table style="width:100%; border-collapse: collapse;">';
-  tableHtml += '<thead style="background-color:#f2f2f2;"><tr><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Time</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Type</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Color</th><th style="padding: 8px; border: 1px solid #ddd; text-align: left;">Notes</th></tr></thead>';
+  let tableHtml = '<h3 id="diaper">Diapers</h3><table>';
+  tableHtml += '<thead><tr><th>Time</th><th>Type</th><th>Color</th><!--<th>Notes</th>--></tr></thead>';
   tableHtml += '<tbody>';
 
   for (const diaper of diapers) {
     const displayTime = await goodTime(diaper.time);
     tableHtml += `<tr>
-      <td style="padding: 8px; border: 1px solid #ddd;">${displayTime}</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${diaper.type}</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${diaper.color ? diaper.color: ""}</td>
-      <td style="padding: 8px; border: 1px solid #ddd;">${diaper.notes ? diaper.notes: ""}</td>
-    </tr>`;
+      <td>${displayTime}</td>
+      <td>${diaper.type}</td>
+      <td>${diaper.color ? diaper.color: ""}</td>
+      <!--<td>${diaper.notes ? diaper.notes: ""}</td>-->
+    </tr>
+    ${diaper.notes ? `<tr><td colspan="3" class="notes">${diaper.notes}</td></tr>` : ""}
+    `;
   }
 
   tableHtml += '</tbody></table>';
