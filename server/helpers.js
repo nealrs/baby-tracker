@@ -304,7 +304,7 @@ async function feedTable() {
     const displayTime = await goodTime(feed.time);
     const source = feed.source;
     const sideOrContent = source === 'breast' ? feed.breast_side : feed.bottle_contents;
-    const durationOrVolume = source === 'breast' ? `${feed.breast_duration} min` : `${feed.bottle_volume ? feed.bottle_volume : ""} ${feed.bottle_volume_unit ? feed.bottle_volume_unit : ""}`;
+    const durationOrVolume = source === 'breast' ? `${feed.breast_duration ? feed.breast_duration : ""} min` : `${feed.bottle_volume ? feed.bottle_volume : ""} ${feed.bottle_volume_unit ? feed.bottle_volume_unit : ""}`;
     
     tableHtml += `<tr>
       <td>${displayTime}</td>

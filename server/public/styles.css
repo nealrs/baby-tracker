@@ -14,11 +14,18 @@ textarea{
   font-style: normal;
   color: #1b263b;
   font-size: 15px;
+  resize: none;
+}
+
+#header{
+  text-align:center;
 }
 
 #submitbutton{
-  font-size: 14px;
+  font-size: 16px;
+  margin-top: .5rem;
 }
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Sora", sans-serif;
   font-optical-sizing: auto;
@@ -48,6 +55,7 @@ th{
 td{
   padding: 8px;
   border: 1px solid #ddd;
+  width: 33.3%
 }
 
 tr{

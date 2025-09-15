@@ -33,12 +33,12 @@ app.get('/', async (req, res) => {
       <body>
        <!--<h2>${process.env.BABYNAME}</h2>-->
        <div id="header" class="sticky">
-        <h3><a href="#feed">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a></h3>
+        <h3><a href="#top">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a></h3>
         
         <div id ="formContainer">
           <form id="form">
             <textarea id="activity" name="activity" rows="2" cols="37" required placeholder="fed from left side, 10 minutes, was very fussy"></textarea>
-            <br><input type="submit" value="Log it" id="submitbutton"/>
+            <br><input type="submit" value="Log activity" id="submitbutton"/>
           </form>
         </div>
        </div>
