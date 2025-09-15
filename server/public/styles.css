@@ -56,9 +56,11 @@ th{
 td{
   padding: 8px;
   border: 1px solid #ddd;
-  width: 33.3%
 }
 
+td.time{
+  width: 35%
+}
 tr{
   padding: 8px;
   border: 1px solid #ddd;

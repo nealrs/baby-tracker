@@ -307,10 +307,9 @@ async function feedTable() {
     const durationOrVolume = source === 'breast' ? `${feed.breast_duration ? feed.breast_duration : ""} min` : `${feed.bottle_volume ? feed.bottle_volume : ""} ${feed.bottle_volume_unit ? feed.bottle_volume_unit : ""}`;
     
     tableHtml += `<tr class="stripe">
-      <td>${displayTime}</td>
+      <td class="time">${displayTime}</td>
       <td>${source}, ${sideOrContent ? sideOrContent : '?'}</td>
       <td>${durationOrVolume}</td>
-      <!--<td>${feed.notes ? feed.notes : ""}</td>-->
     </tr>
     ${feed.notes ? `<tr><td colspan="3" class="notes">${feed.notes}</td></tr>` : ""}
     `;
@@ -337,10 +336,9 @@ async function pumpTable() {
   for (const pump of pumps) {
     const displayTime = await goodTime(pump.time);
     tableHtml += `<tr class="stripe">
-      <td>${displayTime}</td>
+      <td class="time">${displayTime}</td>
       <td>${pump.breast_side ? pump.breast_side : "?"}</td>
       <td>${pump.volume ? pump.volume : ""} ${pump.volume_unit ? pump.volume_unit : "?"}</td>
-      <!--<td>${pump.notes ? pump.notes : ""}</td>-->
     </tr>
     ${pump.notes ? `<tr><td colspan="3" class="notes">${pump.notes}</td></tr>` : ""}
     `;
@@ -367,10 +365,9 @@ async function diaperTable() {
   for (const diaper of diapers) {
     const displayTime = await goodTime(diaper.time);
     tableHtml += `<tr class="stripe">
-      <td>${displayTime}</td>
+      <td class="time">${displayTime}</td>
       <td>${diaper.type}</td>
       <td>${diaper.color ? diaper.color: ""}</td>
-      <!--<td>${diaper.notes ? diaper.notes: ""}</td>-->
     </tr>
     ${diaper.notes ? `<tr><td colspan="3" class="notes">${diaper.notes}</td></tr>` : ""}
     `;
