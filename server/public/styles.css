@@ -87,3 +87,30 @@ a:active, a:hover {color: #778da9;}
   padding: 1rem 0;
   /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
 }
+
+/*
+ * Media query for tablet and mobile devices (screen width up to 768px).
+ * On these smaller screens, we reduce the header padding to make
+ * more efficient use of the space.
+ */
+@media (max-width: 768px) {
+  #header {
+    padding-top: 10px; /* Adjust this value as needed */
+  }
+  body{
+    margin-top: 0;
+  }
+}
+
+/*
+ * Optional: You can add more media queries for specific breakpoints.
+ * For example, this targets very small screens, like phones in portrait mode.
+ */
+@media (max-width: 480px) {
+  #header {
+    padding-top: 0px; /* Even less padding for tiny screens */
+  }
+  body{
+    margin-top: 0;
+  }
+}

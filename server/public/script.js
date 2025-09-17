@@ -7,10 +7,6 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const text = activity.value.trim();
-  if (text === '') {
-    alert("Bro, that's blank");
-  }
-
   const data = { text: text };
   const endpoint = window.location.href; // Posts to the current page's URL
 
