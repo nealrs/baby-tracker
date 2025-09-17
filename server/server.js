@@ -22,7 +22,7 @@ app.get('/', async (req, res) => {
       <head>
        <meta charset="utf-8">
        <link rel="icon" href="favico.png" type="image/png">
-       <link rel="apple-touch-icon" href="favico.png">
+       <link rel="apple-touch-icon" href="touch.png">
        <title>Baby Tracker</title>
        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
        <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,6 @@ app.get('/', async (req, res) => {
        <link rel="stylesheet" href="styles.css">
       </head>
       <body>
-       <!--<h2>${process.env.BABYNAME}</h2>-->
        <div id="header" class="sticky">
         <h3><a href="#top">Feeding</a> &middot; <a href="#diaper">Diapers</a> &middot; <a href="#pump">Pumping</a></h3>
         
